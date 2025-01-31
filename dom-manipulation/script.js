@@ -8,19 +8,20 @@ document.addEventListener('DOMContentLoaded', ()=>{
         { text: "Life is 10% what happens to us and 90% how we react to it.", category: "Life" }
       ];
    
-       
-    function showRandomQuote() {   
-        const random = Math.floor(Math.random()*quotes.length);
-        let quote = quotes[random];
-    }
-    function createAddQuoteForm(){
-    const form = document.createElement('form');
-    form.classList.add('child')
-    form.innerHTML = `"${quote.text}" <br><strong>Category:</strong> ${quote.category}`;
-    quoteDisplay.appendChild(form)
-    // setTimeout(()=>{
-    //     p.style.display = "none"
-    // },500)
+      function showRandomQuote() {   
+          const random = Math.floor(Math.random()*quotes.length);
+          let quote = quotes[random];
+          
+         function createAddQuoteForm(){
+         const form = document.createElement('form');
+         form.classList.add('child')
+         form.innerHTML = `"${quote.text}" <br><strong>Category:</strong> ${quote.category}`;
+         quoteDisplay.appendChild(form)
+         // setTimeout(()=>{
+         //     form.style.display = "none"
+         // },500)
+         }
+        createAddQuoteForm()
     }
     let addQuoteButton = document.querySelector('#addQuoteButton')
     function addQuote() {
@@ -41,4 +42,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
       };
     addQuoteButton.addEventListener('click', addQuote);
     newQuotButton.addEventListener('click', showRandomQuote);
+    
+    // newQuotButton.addEventListener('click', createAddQuoteForm);
 });
