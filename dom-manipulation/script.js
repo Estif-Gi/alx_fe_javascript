@@ -12,13 +12,15 @@ document.addEventListener('DOMContentLoaded', ()=>{
     function showRandomQuote() {   
         const random = Math.floor(Math.random()*quotes.length);
         let quote = quotes[random];
-        const p = document.createElement('p');
-        p.classList.add('child')
-        p.innerHTML = `"${quote.text}" <br><strong>Category:</strong> ${quote.category}`;
-        quoteDisplay.appendChild(p)
-        // setTimeout(()=>{
-        //     p.style.display = "none"
-        // },500)
+    }
+    function createAddQuoteForm(){
+    const form = document.createElement('form');
+    form.classList.add('child')
+    form.innerHTML = `"${quote.text}" <br><strong>Category:</strong> ${quote.category}`;
+    quoteDisplay.appendChild(form)
+    // setTimeout(()=>{
+    //     p.style.display = "none"
+    // },500)
     }
     let addQuoteButton = document.querySelector('#addQuoteButton')
     function addQuote() {
