@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         }
       createAddQuoteForm()
   }
+  newQuotButton.addEventListener('click', showRandomQuote);
   let addQuoteButton = document.querySelector('#addQuoteButton')
   function addQuote() {
     
@@ -35,7 +36,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
     if (newQuoteText && newQuoteCategory) {
       
       quotes.push({ text: newQuoteText, category: newQuoteCategory });
-            
+      
+      localStorage.setItem("quotes", JSON.stringify(quotes));
+      
       document.getElementById('newQuoteText').value = '';
       
       document.getElementById('newQuoteCategory').value = '';
@@ -48,5 +51,50 @@ document.addEventListener('DOMContentLoaded', ()=>{
     }
   };
   addQuoteButton.addEventListener('click', addQuote);
-  newQuotButton.addEventListener('click', showRandomQuote);
+
+
+  const exportButton = document.querySelector('#export-button');
+  exportButton.addEventListener('click',
+    function exportQuotes() {
+      let jsonData = JSON.stringify(quotes, null, 2);
+      const blob = new Blob([jsonData], {type:"application/json"})
+      const url = URL.createObjectURL(blob);
+      const a = document.querySelector("#a");
+      a.href= url;
+      a.download="quotes.json";
+    }
+  );
+  function importFromJsonFile(event) {
+    const file = event.target.files[0];
+    if (!file) return alert("No file selected!");
+
+    const fileReader = new FileReader();
+
+    fileReader.onload = function(event) {
+        try {
+            const importedQuotes = JSON.parse(event.target.result);
+
+            if (!Array.isArray(importedQuotes)) {
+                throw new Error("Invalid file format. Please upload a valid JSON file.");
+            }
+
+            // Ensure quotes array exists
+            if (!window.quotes) {
+                window.quotes = [];
+            }
+
+            // Add new quotes and save
+            quotes.push(...importedQuotes);
+            localStorage.setItem("quotes", JSON.stringify(quotes));
+
+            alert("Quotes imported successfully!");
+        } catch (error) {
+            alert("Error importing quotes: " + error.message);
+        }
+    };
+
+    fileReader.readAsText(file);
+}
+
+
 });

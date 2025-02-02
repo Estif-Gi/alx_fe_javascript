@@ -13,6 +13,10 @@
       <input style="display: flex;justify-self: center;"id="newQuoteText" type="text" placeholder="Enter a new quote" />
       <br><input style="display: flex;justify-self: center;"id="newQuoteCategory" type="text" placeholder="Enter quote category" />
       <br><button id="addQuoteButton" style="display: flex;justify-self: center;">Add Quote</button>
+      <br>
+      <a id="a"><button id="export-button" style="display: flex;justify-self: center;">export Quote</button></a>
+      <input type="file" id="importFile" accept=".json" onchange="importFromJsonFile(event)" />
+
     </div>
     <script src="script.js"></script>
   </body>
