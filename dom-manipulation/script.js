@@ -51,6 +51,15 @@ document.addEventListener('DOMContentLoaded', ()=>{
     }
   };
   addQuoteButton.addEventListener('click', addQuote);
+  function onHand(){
+    let text = localStorage.getItem('quotes');
+    JSON.stringify(text)
+    console.log(text);
+    let onHand = document.querySelector('.onHand')
+    onHand.innerHTML= `<p>${text.text} <br>category ${text.category}</p>`
+
+  }
+  onHand()
 
 
   const exportButton = document.querySelector('#export-button');
