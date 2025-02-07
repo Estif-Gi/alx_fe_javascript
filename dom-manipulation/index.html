@@ -15,8 +15,12 @@
       <br><button id="addQuoteButton" style="display: flex;justify-self: center;">Add Quote</button>
       <br>
       <a id="a"><button id="export-button" style="display: flex;justify-self: center;">Export Quotes</button></a>
-      <input type="file" id="importFile" accept=".json" onchange="importFromJsonFile(event)" />
+      <input type="file" id="importFile" accept=".json"  />
     </div>
+    <select id="categoryFilter" onchange="filterQuotes()">
+      <option value="all">All Categories</option>
+      
+    </select>
     <div class="onHand">
     </div>
     <script src="script.js"></script>
