@@ -123,7 +123,7 @@ let addQuoteButton = document.querySelector("#addQuoteButton");
 let exportButton = document.querySelector("#export-button");
 let importFile = document.querySelector("#importFile");
 let onHand = document.querySelector(".onHand");
-
+let newQuoteText =document.querySelector("#newQuoteText");
 // Load quotes from localStorage or initialize an empty array
 let quotes = JSON.parse(localStorage.getItem("quotes")) || [
     { text: "Life is beautiful.", category: "Life" },
@@ -140,6 +140,7 @@ function populateCategories() {
     categoryFilter.innerHTML = categories
         .map(category =>` <option value="${category}">${category}</option>`)
         .join("");
+        
 }
 
 // Filter quotes based on selected category
@@ -154,6 +155,7 @@ function filterQuotes() {
 
     filteredQuotes.forEach(quote => {
         onHand.innerHTML += `<p>${quote.text} <br><strong>Category:</strong> ${quote.category}</p>`;
+        
     });
 }
 
@@ -173,6 +175,7 @@ function addQuote() {
         populateCategories(); 
     } else {
         alert("Please fill in both fields to add a new quote.");
+        newQuoteText.textContent = "";
     }
 }
 
