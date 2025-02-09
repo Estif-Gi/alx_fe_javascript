@@ -22,6 +22,22 @@ async function fetchQuotesFromServer() {
     }
 }
 
+// Sync quotes from local storage to mock API
+async function syncQuotes() {
+    try {
+        for (const quote of quotes) {
+            await fetch('https://jsonplaceholder.typicode.com/posts', {
+                method: 'POST',
+                body: JSON.stringify({ title: quote.text, body: quote.category, userId: 1 }),
+                headers: { 'Content-Type': 'application/json; charset=UTF-8' }
+            });
+        }
+        console.log("Quotes synced successfully.");
+    } catch (error) {
+        console.error("Error syncing quotes:", error);
+    }
+}
+
 // Show a random quote
 function showRandomQuote() {
     if (quotes.length === 0) return;
@@ -51,7 +67,7 @@ function filterQuotes() {
     });
 }
 
-// Add new quote
+// Add new quote and post to mock API
 async function addQuote() {
     let newQuoteTextValue = newQuoteText.value;
     let newQuoteCategory = document.getElementById("newQuoteCategory").value;
@@ -67,8 +83,8 @@ async function addQuote() {
         try {
             const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
                 method: 'POST',
-                body: JSON.stringify({ title: newQuoteTextValue, body: "", userId: 1 }),
-                headers: { 'Content-Type': 'application/json; charset=UTF-8' }
+                body: JSON.stringify({ title: newQuoteTextValue, body: newQuoteCategory, userId: 1 }),
+                headers: { 'Content-type': 'application/json; charset=UTF-8' }
             });
             const data = await response.json();
             console.log("Posted new quote:", data);
@@ -101,6 +117,9 @@ exportButton.addEventListener("click", exportQuotes);
 
 // Periodic fetching every 10 seconds
 setInterval(fetchQuotesFromServer, 10000);
+
+// Periodic syncing every 30 seconds
+setInterval(syncQuotes, 30000);
 
 document.addEventListener("DOMContentLoaded", () => {
     fetchQuotesFromServer();
