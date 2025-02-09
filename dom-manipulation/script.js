@@ -9,7 +9,7 @@ let newQuoteText = document.querySelector("#newQuoteText");
 let quotes = [];
 
 // Fetch quotes from JSONPlaceholder
-async function fetchQuotes() {
+async function fetchQuotesFromServer() {
     try {
         const response = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=5');
         const data = await response.json();
@@ -88,7 +88,7 @@ async function addQuote() {
 setInterval(fetchQuotes, 10000);
 
 document.addEventListener("DOMContentLoaded", () => {
-    fetchQuotes();
+    fetchQuotesFromServer();
 });
 
 addQuoteButton.addEventListener("click", addQuote);
