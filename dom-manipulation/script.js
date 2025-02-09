@@ -84,8 +84,23 @@ async function addQuote() {
     }
 }
 
+// Export quotes as JSON file
+function exportQuotes() {
+    let jsonData = JSON.stringify(quotes, null, 2);
+    const blob = new Blob([jsonData], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "quotes.json";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+}
+
+exportButton.addEventListener("click", exportQuotes);
+
 // Periodic fetching every 10 seconds
-setInterval(fetchQuotes, 10000);
+setInterval(fetchQuotesFromServer, 10000);
 
 document.addEventListener("DOMContentLoaded", () => {
     fetchQuotesFromServer();
@@ -93,3 +108,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
 addQuoteButton.addEventListener("click", addQuote);
 categoryFilter.addEventListener("change", filterQuotes);
+
