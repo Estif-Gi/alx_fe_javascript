@@ -68,7 +68,7 @@ async function addQuote() {
             const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
                 method: 'POST',
                 body: JSON.stringify({ title: newQuoteTextValue, body: "", userId: 1 }),
-                headers: { 'Content-type': 'application/json; charset=UTF-8' }
+                headers: { 'Content-Type': 'application/json; charset=UTF-8' }
             });
             const data = await response.json();
             console.log("Posted new quote:", data);
@@ -108,4 +108,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
 addQuoteButton.addEventListener("click", addQuote);
 categoryFilter.addEventListener("change", filterQuotes);
-
