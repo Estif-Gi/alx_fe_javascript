@@ -32,7 +32,7 @@ async function syncQuotes() {
                 headers: { 'Content-Type': 'application/json; charset=UTF-8' }
             });
         }
-        console.log("Quotes synced successfully.");
+        console.log("Quotes synced with server!");
     } catch (error) {
         console.error("Error syncing quotes:", error);
     }
